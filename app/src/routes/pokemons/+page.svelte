@@ -2,44 +2,62 @@
    export let data;
 </script>
 
-<h1>Pokemons</h1>
+<h1>Lista de Pokemones</h1>
 
-<table>
-   <thead>
-       <tr>
-           <th>Nombre</th>
-           <th>Imagen</th>
-           <th>Altura</th>
-           <th>Peso</th>
-           <th>Generacion</th>
-           <th>Tipos</th>
-           <th>Habilidades</th>
-           <th>Grupo Huevo</th>
-           <th>Stats</th>
-           <th>Imagen Evolución</th>
-       </tr>
-   </thead>
-   <tbody>
-       {#each data.pokemons as pokemon}
-           <tr>
-                <td>{pokemon.nombre}</td>
-                <td><img src="{pokemon.imagen}" alt="{pokemon.nombre}"></td>
-                <td>{pokemon.altura}</td>
-                <td>{pokemon.peso}</td>
-                {#each pokemon.tipos as tipo}
-                    <td>{tipo.nombre}</td>
-                {/each}
-                {#each pokemon.habilidades as habilidad}
-                    <td>{habilidad.nombre}</td>
-                {/each}
-                {#each pokemon.grupo_huevo as grupo_huevo}
-                    <td>{grupo_huevo.nombre}</td>
-                {/each}
-                {#each pokemon.stats as stat}
-                    <td>valor: {stat.base_stat}</td>
-                {/each}
-                <td><img src="{pokemon.imagen_evolucion}" alt="{""}"></td>
-           </tr>
-       {/each}
-   </tbody>
-</table>
+<div class="pokedex">
+    {#each data.pokemons as pokemon}    
+    <a href={`/pokemons/${pokemon.nombre}`} class="pokemon-tarjeta">
+        <img src="{pokemon.imagen}" alt="{pokemon.nombre}">
+        <h3 class="pokemon-nombre">{pokemon.nombre}</h3>
+        {#each pokemon.tipos as tipo}
+        <p class="pokemon-tipos">{tipo.nombre}</p>
+        {/each}
+    </a>
+    {/each}
+</div>
+
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .pokedex {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    }
+
+    .pokemon-tarjeta {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    }
+
+    .pokemon-tarjeta:hover {
+    transform: scale(1.05);
+    }
+
+    .pokemon-tarjeta img {
+    max-width: 100px;
+    margin-bottom: 10px;
+    }
+
+    .pokemon-nombre {
+    margin: 5px 0;
+    color: #333;
+    }
+
+    .pokemon-tipos {
+    font-size: 14px;
+    color: #555;
+    }
+</style>

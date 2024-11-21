@@ -1,13 +1,16 @@
+import { error } from '@sveltejs/kit';
+
 export async function load() {
-   let url = new URL('http://127.0.0.1:8000/pokemons/')
-   const response = await fetch(url);
-   if (!response.ok) {
-       throw new Error(`Response status: ${response.status}`);
-   }
+  const url = new URL('http://127.0.0.1:8000/pokemons/');
+  const response = await fetch(url);
 
-   let pokemons = await response.json();
+  if (!response.ok) {
+    throw error(response.status, 'Could not fetch the list of Pokemons');
+  }
 
-   return {
-       pokemons: pokemons
-   };
+  const pokemons = await response.json();
+
+  return {
+    pokemons
+  };
 }

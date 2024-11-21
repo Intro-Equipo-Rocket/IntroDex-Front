@@ -12,6 +12,11 @@
 		display: flex;
 		justify-content: space-around;
 	}
+
+    a {
+    text-decoration: none;
+    }
+
     .nav-button {
         display: flex;
         justify-content: center;
