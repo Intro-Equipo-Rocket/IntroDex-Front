@@ -17,47 +17,43 @@
 </div>
 
 <style>
-    h1 {
-        text-align: center;
-    }
 
-    a {
-        text-decoration: none;
-    }
+h1{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
 
-    .pokedex {
+.pokedex {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
     padding: 20px;
-    }
-
-    .pokemon-tarjeta {
+}
+.pokemon-tarjeta {
     background: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid grey;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
     transition: transform 0.2s ease-in-out;
-    }
-
-    .pokemon-tarjeta:hover {
+}
+.pokemon-tarjeta:hover {
     transform: scale(1.05);
-    }
-
-    .pokemon-tarjeta img {
+}
+.pokemon-tarjeta img {
     max-width: 100px;
     margin-bottom: 10px;
-    }
-
-    .pokemon-nombre {
+}
+.pokemon-nombre {
     margin: 5px 0;
     color: #333;
-    }
-
-    .pokemon-tipos {
+}
+.pokemon-tipos {
     font-size: 14px;
     color: #555;
-    }
+}
+
 </style>
