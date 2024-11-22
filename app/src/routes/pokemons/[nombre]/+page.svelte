@@ -1,5 +1,7 @@
 <script>
   export let data;
+  
+  let total_stats = data.pokemon.stats.reduce((total, stat) => total + stat.base_stat, 0);
 </script>
 
 {#if data.pokemon}
@@ -16,10 +18,6 @@
       </div>
       <table>
         <tbody>
-          <tr>
-            <th><h1>Pokedex</h1></th>
-            <td><h1>Data</h1></td>
-          </tr>
           <tr>
             <th>Tipos</th>
             <td>
@@ -48,8 +46,37 @@
               {/each}
             </td>
           </tr>
+          <tr>
+            <th>Grupo Huevo</th>
+            <td>
+              {#each data.pokemon.grupo_huevo as grupo}
+                <p>{grupo.nombre}</p>
+              {/each}
+            </td>
+          </tr>
         </tbody>
       </table>
+      <div class="pokemon-stats">
+        <h2>Base stats</h2>
+        <div>
+          <table>
+            {#each data.pokemon.stats as stat}
+            <tbody>
+              <tr>
+                <th>{stat.stats.nombre}:</th>
+                <td>{stat.base_stat}</td>
+              </tr>
+            </tbody>
+            {/each}
+            <tfoot>
+              <tr>
+                <th>Total</th>
+                <td>{total_stats}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -104,9 +131,7 @@
   display: flex;
   justify-content: center;
   align-items: center; 
-  position: relative; 
-  height: 300px; 
-  width: 400px; 
+  position: relative;
   background-color: #f4f4f4; 
 }
 
@@ -116,9 +141,10 @@
 }
 
 .pokemon-info th {
-  text-align: left;
+  text-align: end;
   color: #555;
   font-weight: bold;
+  padding-inline: 10px;
 }
 
 .pokemon-info td {
@@ -210,6 +236,23 @@
 
 .pokemon-tipo.hada {
   background-color: #EE99AC;
+}
+
+.pokemon-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pokemon-info th {
+  text-align: end;
+  color: #555;
+  font-weight: bold;
+  padding-inline: 10px;
+}
+
+.pokemon-info td {
+  padding: 10px;
+  color: #333;
 }
 
 </style>

@@ -4,7 +4,7 @@
 
 <h1>Lista de Pokemones</h1>
 
-<div class="pokedex">
+<div class="pokemon-lista">
     {#each data.pokemons as pokemon}    
     <a href={`/pokemons/${pokemon.nombre}`} class="pokemon-tarjeta">
         <img src="{pokemon.imagen}" alt="{pokemon.nombre}">
@@ -25,7 +25,7 @@ a{
     text-decoration: none;
 }
 
-.pokedex {
+.pokemon-lista {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
