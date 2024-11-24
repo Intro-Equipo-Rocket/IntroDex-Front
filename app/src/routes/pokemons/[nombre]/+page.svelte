@@ -163,23 +163,23 @@
 }
 
 .pokemon-tipo.agua {
-  background-color: #0080ff;
+  background-color: #6390f0;
 }
 
 .pokemon-tipo.siniestro {
-  background-color: #573e31;
+  background-color: #705848;
 }
 
 .pokemon-tipo.normal {
-  background-color: #797964;
+  background-color: #A8A878;
 }
 
 .pokemon-tipo.planta {
-  background-color: #5cb737;
+  background-color: #78C850;
 }
 
 .pokemon-tipo.fuego {
-  background-color: #d52100;
+  background-color: #F08030;
 }
 
 .pokemon-tipo.agua {
@@ -187,55 +187,55 @@
 }
 
 .pokemon-tipo.eléctrico {
-  background-color: #c90;
+  background-color: #F8D030;
 }
 
 .pokemon-tipo.hielo {
-  background-color: #0af;
+  background-color: #98D8D8;
 }
 
 .pokemon-tipo.lucha {
-  background-color: #a84d3d;
+  background-color: #C03028;
 }
 
 .pokemon-tipo.veneno {
-  background-color: #88447a;
+  background-color: #A040A0;
 }
 
 .pokemon-tipo.tierra {
-  background-color: #bf9926;
+  background-color: #E0C068;
 }
 
 .pokemon-tipo.volador {
-  background-color: #556dff;
+  background-color: #A890F0;
 }
 
 .pokemon-tipo.psíquico {
-  background-color: #ff227a;
+  background-color: #F85888;
 }
 
 .pokemon-tipo.bicho {
-  background-color: #83901a;
+  background-color: #A8B820;
 }
 
 .pokemon-tipo.roca {
-  background-color: #a59249;
+  background-color: #B8A038;
 }
 
 .pokemon-tipo.fantasma {
-  background-color: #5454b3;
+  background-color: #705898;
 }
 
 .pokemon-tipo.dragón {
-  background-color: #4e38e9;
+  background-color: #7038F8;
 }
 
 .pokemon-tipo.acero {
-  background-color: #8e8ea4;
+  background-color: #B8B8D0;
 }
 
 .pokemon-tipo.hada {
-  background-color: #e76de7;
+  background-color: #EE99AC;
 }
 
 .pokemon-info table {
