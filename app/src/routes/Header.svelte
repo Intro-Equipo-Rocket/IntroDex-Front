@@ -49,7 +49,8 @@ h1 {
     max-width:1220px
 }
 .main-header {
-    height:124px;
+    margin-top: -21px;
+    height:80px;
     background-color:#202020;
 }
 .main-menu {
