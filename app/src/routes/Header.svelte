@@ -42,6 +42,7 @@ h1 {
     font-family:"Fira Sans","Trebuchet MS",Ubuntu,Helvetica,Arial sans-serif;
     font-weight:bold;
     text-align: center;
+    padding: 1rem 2rem;
 }
     
 .grid-container {
@@ -50,8 +51,9 @@ h1 {
 }
 .main-header {
     margin-top: -21px;
-    height:80px;
+    height: auto;
     background-color:#202020;
+    align-content: center;
 }
 .main-menu {
     margin-top:-24px;
@@ -81,7 +83,7 @@ h1 {
     flex-direction:column;
     align-items:center;
     height:100%;
-    padding:.25rem .5rem 0;
+    padding:.25rem .5rem;
     font-size:.75rem;
     text-align:center
 }
