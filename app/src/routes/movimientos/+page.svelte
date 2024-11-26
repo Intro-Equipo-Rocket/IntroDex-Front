@@ -1,12 +1,18 @@
 <script>
     export let data;
-    console.log(data);
+    function capitalize(str) {
+        if (!str)
+            return '';
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
 </script>
 
 <h1>Movimientos</h1>
-<form method='GET' action="?/show">
-    <label for="id">ID:</label>
-    <input type="text" id="id" name="id">
+<form class="form_movimientos" method='GET' action="?/show">
+    <div>
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id">
+    </div>
 </form>
 {#if !data.error}
     {#if data.movimiento}
@@ -34,14 +40,112 @@
                             N/A
                         {/if}</span>
                 </div>
+                {#if data.movimiento.class_categoria.nombre == "físico"}
+                    <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-physical.png" alt="Físico.png">
+                {:else if data.movimiento.class_categoria.nombre == "especial"}
+                    <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-special.png" alt="Especial.png">
+                {:else if data.movimiento.class_categoria.nombre == "estado"}
+                    <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-status.png" alt="Estado.png">
+                {/if}
+                <span class="efecto">{data.movimiento.class_efecto.descripcion}</span>
             </div>
+        <h1>Pokemones</h1>
+        {#if !data.pokemones}
+            <h2 class="error_msg">No hay pokemones que aprendan este movimiento</h2>
+        {:else}
+            <div class="table-responsive">
+                <table class="tabla_pokemones">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Metodo</th>
+                            <th>Nivel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each data.pokemones as pokemon}
+                            <tr>
+                                <td><img src={pokemon.imagen} alt={pokemon.nombre}></td>
+                                <td>{pokemon.nombre}</td>
+                                <td>{#each pokemon.tipos as tipos}
+                                    <p class="pokemon-tipo {tipos.nombre.toLowerCase()}">{tipos.nombre}</p>
+                                {/each}</td>
+                                <td>{pokemon.movimientos[0].metodo.nombre}</td>
+                                {#if pokemon.movimientos[0].nivel}
+                                    <td>{pokemon.movimientos[0].nivel}</td>
+                                {:else}
+                                    <td>N/A</td>
+                                {/if}
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+        {/if}
+    {:else}
+        <h2 class="error_msg">Esperando datos...</h2>
     {/if}
 {:else}
     <h2 class="error_msg">{data.status}: {data.error}</h2>
 {/if}
+
 <style>
-    .error_msg {
+    .form_movimientos {
+        gap: 10px;
         margin: 20px auto;
+        width: 50%;
+        justify-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 20px 0;
+        border-radius: 5px;
+        text-align: center;
+    }
+    h1 {
+        margin-left: 20px;
+        color: white;
+        text-decoration: underline;
+    }
+    .error_msg {
+        color: white;
+        width: 50%;
+        margin: 20px auto;
+        text-align: center;
+        background-color: #ff0000;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 50px;
+        margin-bottom: 37%;
+    }
+    .tabla_pokemones {
+        width: 50%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .tabla_pokemones thead {
+        background-color: #333;
+        color: white;
+    }
+    .tabla_pokemones tbody {
+        background-color: #f2f2f2;
+    }
+    .tabla_pokemones th, .tabla_pokemones td {
+        border: 1px solid #333;
+        padding: 5px;
+        text-align: center;
+        text-transform: capitalize;
+        align-items: center;
+        justify-items: center;
+        align-self: center;
+    }
+    .tabla_pokemones th {
+        font-size: 1.2rem;
+    }
+    .pokemon-tipo {
+        margin: 5px;
     }
     .datos_movimiento {
         color: white;
@@ -51,6 +155,7 @@
         height: 50%;
         border-radius: 5px;
         margin: 20px auto;
+        align-self: center;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         font-family: Arial, Helvetica, sans-serif;
@@ -66,7 +171,7 @@
         justify-items: center;
     }
     .movim_nombre {
-        font-size: 2rem;
+        font-size: 3rem;
         text-align: center;
         padding: 35px 20px 5px;
         grid-column: 1 / 8;
@@ -102,6 +207,24 @@
         text-align: center;
         grid-column: 3;
         width: min-content;
+    }
+    .movim_categoria {
+        grid-column: 6 / 8;
+        grid-row: 2;
+        width: 66px;
+        height: 30px;
+        justify-self: center;
+    }
+    .efecto {
+        font-size: 1rem;
+        text-align: center;
+        text-transform: none;
+        padding: 20px 10px;
+        grid-column: 1 / 8;
+        width: 100%;
+        border: 1px solid white;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
     }
     .Normal {
         background-color: #A8A878;

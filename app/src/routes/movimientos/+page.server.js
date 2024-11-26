@@ -32,18 +32,27 @@ export const actions = {
 export async function load({ url }) {
   const id = url.searchParams.get('id');
   if (id) {
-    const apiUrl = `http://127.0.0.1:8000/movimientos/id/${id}`;
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
+    const url_movimientos = `http://127.0.0.1:8000/movimientos/id/${id}`;
+    const response_movimientos = await fetch(url_movimientos);
+    if (!response_movimientos.ok) {
       return {
-        status: response.status,
+        status: response_movimientos.status,
         error: 'Could not fetch the Movimiento'
       };
     }
-    const data_movimiento = await response.json();
-    console.log(data_movimiento)
+    const data_movimiento = await response_movimientos.json();
+    const url_pokemones = `http://127.0.0.1:8000/movimientos/${id}/pokemon`;
+    const response_pokemones = await fetch(url_pokemones);
+    if (!response_pokemones.ok) {
+      return {
+        movimiento: data_movimiento,
+        pokemones: null
+      };
+    }
+    const data_pokemones = await response_pokemones.json();
     return {
-      movimiento: data_movimiento
+        movimiento: data_movimiento,
+        pokemones: data_pokemones
     };
   }
   return {
