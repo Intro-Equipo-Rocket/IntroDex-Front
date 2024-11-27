@@ -2,6 +2,16 @@
   export let data;
   
   let total_stats = data.pokemon.stats.reduce((total, stat) => total + stat.base_stat, 0);
+
+  const imagenesCategorias = {
+    "físico": "https://img.pokemondb.net/images/icons/move-physical.png",
+    "especial": "https://img.pokemondb.net/images/icons/move-special.png",
+    "estado": "https://img.pokemondb.net/images/icons/move-status.png",
+  };
+
+  function obtenerImagenCategoria(categoria) {
+    return imagenesCategorias[categoria.toLowerCase()] || "https://img.pokemondb.net/images/icons/move-status.png";
+  }
 </script>
 
 {#if data.pokemon}
@@ -79,50 +89,53 @@
       </div>
     </div>
   </div>
-
-
-
-
-<div class="movimiento-header">
-  <h2 class="movimiento">Movimientos</h2>
-</div>
-  <div class="informacion-tabla-movimientos">
-    <div class="tabla-movimientos">
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Fuerza</th>
-            <th>Precisión</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.pokemon.movimientos as movimiento}
-            <tr>
-              <td>{movimiento.nombre}</td>
-              <td>
-                <span class="pokemon-tipo {movimiento.nombre.toLowerCase()}">{movimiento.nombre}</span>
-              </td>
-              {#if movimiento.potencia === null}
-                <td>-</td>
-              {:else}
-                <td>{movimiento.potencia}</td>
-              {/if}
-              {#if movimiento.precision === null}
-                <td>-</td>
-              {:else}
-                <td>{movimiento.precision}</td>
-              {/if}
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
 </div>
 
 
-
+<h2 class="movimiento">Movimientos:</h2>
+<div class="informacion-tabla-movimientos">
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Categoria</th>
+        <th>Fuerza</th>
+        <th>Precisión</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each data.pokemon.movimientos as movimiento}
+        <tr>
+          <td>{movimiento.movimientos.nombre}</td>
+          <td>
+            <span class="pokemon-tipo {movimiento.movimientos.class_tipo.nombre.toLowerCase()}">
+              {movimiento.movimientos.class_tipo.nombre}
+            </span>
+          </td>
+          <td>
+            <img 
+              src={obtenerImagenCategoria(movimiento.movimientos.class_categoria.nombre)} 
+              alt={movimiento.movimientos.class_categoria.nombre} 
+              class="imagen-categoria" 
+              style="width: 30px; height: 30px; vertical-align: middle;"
+            />
+            {movimiento.movimientos.class_categoria.nombre}
+          </td>
+          {#if movimiento.movimientos.potencia == null}
+            <td>-</td>
+          {:else}
+            <td>{movimiento.movimientos.potencia}</td>
+          {/if}
+          {#if movimiento.movimientos.precision == null}
+            <td>-</td>
+          {:else}
+            <td>{movimiento.movimientos.precision}</td>
+          {/if}
+        </tr>
+      {/each}
+    </tbody>
+  </table>
 </div>
 
 
@@ -300,25 +313,20 @@
   color: #333;
 }
 
-.movimiento-header {
-  font-size: 0.8rem;
-  display: inline-block;
-  padding: 4px 6px;  
-  margin-right: 2px;
-  margin-bottom: 2px; 
-  border-radius: 20px;
-  border: 2px solid #333;  
-  background-color: #333;
-}
+
 .movimiento {
   text-transform: capitalize;
-  color: #f4f4f4;
+  font-size: 3rem;
+  color: #333;
+  margin-left: 30px;
+  margin-bottom: 10px;
 }
 
 .informacion-tabla-movimientos {
-  text-align: center; 
-  padding: 10px; 
-  background-color: #f4f4f4;
+  max-width: 85%;
+  margin: 0 auto; 
+  padding: 20px; 
+  overflow-x: auto;
   
 }
 
@@ -326,11 +334,18 @@
 .informacion-tabla-movimientos th {
   padding: 10px;
   text-align: center;
+  color : #333;
+  font-size: 2rem;
+  border: 1px solid #b8adad;
+  background-color: #c0c3c7;
 }
 
 .informacion-tabla-movimientos td {
   padding: 10px;
   text-align: center;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #b8adad;
+  color : #555;
 }
 
 .informacion-tabla-movimientos table {
