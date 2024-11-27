@@ -2,6 +2,8 @@
   export let data;
   
   let total_stats = data.pokemon.stats.reduce((total, stat) => total + stat.base_stat, 0);
+  let metodoMaquina = "Máquina";
+  let metodoHuevo = "Huevo";
 
   const imagenesCategorias = {
     "físico": "https://img.pokemondb.net/images/icons/move-physical.png",
@@ -102,6 +104,8 @@
         <th>Categoria</th>
         <th>Fuerza</th>
         <th>Precisión</th>
+        <th>Metodo</th>
+        <th>Nivel</th>
       </tr>
     </thead>
     <tbody>
@@ -131,6 +135,12 @@
             <td>-</td>
           {:else}
             <td>{movimiento.movimientos.precision}</td>
+          {/if}
+          <td>{movimiento.metodo.nombre}</td>
+          {#if movimiento.metodo.nombre == metodoMaquina || movimiento.metodo.nombre == metodoHuevo}
+            <td>-</td>
+          {:else}
+            <td>{movimiento.nivel}</td>
           {/if}
         </tr>
       {/each}
