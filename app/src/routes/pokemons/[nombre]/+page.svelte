@@ -79,7 +79,52 @@
       </div>
     </div>
   </div>
+
+
+
+
+<div class="movimiento-header">
+  <h2 class="movimiento">Movimientos</h2>
 </div>
+  <div class="informacion-tabla-movimientos">
+    <div class="tabla-movimientos">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Fuerza</th>
+            <th>Precisión</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each data.pokemon.movimientos as movimiento}
+            <tr>
+              <td>{movimiento.nombre}</td>
+              <td>
+                <span class="pokemon-tipo {movimiento.nombre.toLowerCase()}">{movimiento.nombre}</span>
+              </td>
+              {#if movimiento.potencia === null}
+                <td>-</td>
+              {:else}
+                <td>{movimiento.potencia}</td>
+              {/if}
+              {#if movimiento.precision === null}
+                <td>-</td>
+              {:else}
+                <td>{movimiento.precision}</td>
+              {/if}
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+
+</div>
+
 
 {:else}
   <p>Cargando datos del Pokémon...</p>
@@ -255,4 +300,42 @@
   color: #333;
 }
 
+.movimiento-header {
+  font-size: 0.8rem;
+  display: inline-block;
+  padding: 4px 6px;  
+  margin-right: 2px;
+  margin-bottom: 2px; 
+  border-radius: 20px;
+  border: 2px solid #333;  
+  background-color: #333;
+}
+.movimiento {
+  text-transform: capitalize;
+  color: #f4f4f4;
+}
+
+.informacion-tabla-movimientos {
+  text-align: center; 
+  padding: 10px; 
+  background-color: #f4f4f4;
+  
+}
+
+
+.informacion-tabla-movimientos th {
+  padding: 10px;
+  text-align: center;
+}
+
+.informacion-tabla-movimientos td {
+  padding: 10px;
+  text-align: center;
+}
+
+.informacion-tabla-movimientos table {
+  background-color: #e7e7f1;
+  width: 100%;
+  border-collapse: collapse;
+}
 </style>
