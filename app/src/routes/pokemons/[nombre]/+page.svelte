@@ -306,24 +306,6 @@
   background-color: #e76de7;
 }
 
-.pokemon-info table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.pokemon-info th {
-  text-align: end;
-  color: #555;
-  font-weight: bold;
-  padding-inline: 10px;
-}
-
-.pokemon-info td {
-  padding: 10px;
-  color: #333;
-}
-
-
 .movimiento {
   text-transform: capitalize;
   font-size: 3rem;
@@ -339,7 +321,6 @@
   overflow-x: auto;
   
 }
-
 
 .informacion-tabla-movimientos th {
   padding: 10px;
