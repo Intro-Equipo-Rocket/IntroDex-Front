@@ -8,12 +8,13 @@
     let { equipos, pagina, cantidadEquipos } = data;
 
     $: {
-        const paginaActual = get(page);
-        const nuevaPagina = parseInt(paginaActual.params.pagina) || 1;
-        const cantidadEquipos = 5;
+        const currentPage = get(page);
+        const newPage = parseInt(currentPage.params.pagina) || 1;
+        const newCantidadEquipos = parseInt(currentPage.url.searchParams.get('cantidad_equipos')) || 5;
 
-        if (nuevaPagina !== pagina) {
-            pagina = nuevaPagina;
+        if (newPage !== pagina || newCantidadEquipos !== cantidadEquipos) {
+            pagina = newPage;
+            cantidadEquipos = newCantidadEquipos;
             equipos = data.equipos;
         }
     }
@@ -32,22 +33,23 @@
     <h1>Equipos - Página {pagina}</h1>
 
     {#if equipos.length > 0}
-    {#each equipos as equipo}
-    <div class="team-container">
+        {#each equipos as equipo}
+        <div class="team-container">
             <ul class="team-list">
                 <li>
-                    <div class="team-hover">
+                    <div class="team team-hover">
                         <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong></span>
-                        <ul>
-                            {#each equipo.integrantes as integrante}               
-                                <img src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
-                            {/each}
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                            <ul>
+                                {#each equipo.integrantes as integrante}               
+                                    <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
+                                {/each}
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         {/each}
+
         <nav>
             {#if pagina > 1}
                 <button on:click={() => cambiarPagina(pagina - 1)}>Anterior</button>

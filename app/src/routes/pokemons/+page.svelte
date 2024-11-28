@@ -21,9 +21,6 @@
 h1{
     text-align: center;
 }
-a{
-    text-decoration: none;
-}
 
 .pokemon-lista {
     display: grid;
