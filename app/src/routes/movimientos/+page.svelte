@@ -1,5 +1,3 @@
-
-
 <script>
     export let data;
     const pixel_limit = 10;
