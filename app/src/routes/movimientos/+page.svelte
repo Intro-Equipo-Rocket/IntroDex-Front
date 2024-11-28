@@ -72,7 +72,7 @@
                         {#each data.pokemones as pokemon}
                             <tr>
                                 <td><img src={pokemon.imagen} alt={pokemon.nombre}></td>
-                                <td>{pokemon.nombre}</td>
+                                <td><a href="../pokemons/{pokemon.nombre}">{pokemon.nombre}</a></td>
                                 <td>{#each pokemon.tipos as tipos}
                                     <p class="pokemon-tipo {tipos.nombre.toLowerCase()}">{tipos.nombre}</p>
                                 {/each}</td>
