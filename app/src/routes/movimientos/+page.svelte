@@ -1,19 +1,23 @@
+
+
 <script>
     export let data;
-    function capitalize(str) {
-        if (!str)
-            return '';
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }
+    const pixel_limit = 10;
 </script>
 
+
 <h1>Movimientos</h1>
-<form class="form_movimientos" method='GET' action="?/show">
-    <div>
-        <label for="id">ID:</label>
+<div class="form_movimientos">
+    <form class="buscar_id" method='GET' action="?/show_id">
+        <label for="id">Buscar por id:</label>
         <input type="text" id="id" name="id">
-    </div>
-</form>
+        <button type="submit">Buscar</button>
+    </form>
+    <form class="buscar_nombre" method='GET' action="?/show_name">
+        <label for="nombre">Buscar por nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <button type="submit">Buscar</button>
+</div>
 {#if !data.error}
     {#if data.movimiento}
             <div class="datos_movimiento {data.movimiento.class_tipo.nombre}">
@@ -75,6 +79,8 @@
                                 <td>{pokemon.movimientos[0].metodo.nombre}</td>
                                 {#if pokemon.movimientos[0].nivel}
                                     <td>{pokemon.movimientos[0].nivel}</td>
+                                {:else if pokemon.movimientos[0].metodo.nombre == "Nivel"}
+                                    <td>{pokemon.movimientos[0].nivel}</td>
                                 {:else}
                                     <td>N/A</td>
                                 {/if}
@@ -91,22 +97,54 @@
     <h2 class="error_msg">{data.status}: {data.error}</h2>
 {/if}
 
+
 <style>
     .form_movimientos {
+        display: grid;
+        grid-template-columns: 0.5fr 1.5fr;
         gap: 10px;
         margin: 20px auto;
         width: 50%;
-        justify-items: center;
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
         padding: 20px 0;
         border-radius: 5px;
         text-align: center;
+    } button {
+        padding: 10px;
+        background-color: #555;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    } form {
+        display: grid;
+        gap: 10px;
+        width: 90%;
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+    } input {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #333;
+    }
+    .buscar_id {
+        grid-column: 1;
+        justify-items: center;
+    }
+    .buscar_id input {
+        width: 50%;
     }
     h1 {
         margin-left: 20px;
         color: white;
         text-decoration: underline;
+        text-shadow:
+            -0.8px -0.8px 0 #444,  
+             0.8px -0.8px 0 #444,
+            -0.8px  0.8px 0 #444,
+             0.8px  0.8px 0 #444;
     }
     .error_msg {
         color: white;
