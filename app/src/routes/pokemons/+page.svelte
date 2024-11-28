@@ -10,7 +10,7 @@
         <img src="{pokemon.imagen}" alt="{pokemon.nombre}">
         <h3 class="pokemon-nombre">{pokemon.nombre}</h3>
         {#each pokemon.tipos as tipo}
-        <p class="pokemon-tipos">{tipo.nombre}</p>
+        <span class="pokemon-tipo {tipo.nombre.toLowerCase()}">{tipo.nombre}</span>
         {/each}
     </a>
     {/each}
@@ -47,10 +47,6 @@ h1{
 .pokemon-nombre {
     margin: 5px 0;
     color: #333;
-}
-.pokemon-tipos {
-    font-size: 14px;
-    color: #555;
 }
 
 </style>
