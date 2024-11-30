@@ -1,5 +1,24 @@
 <script>
+    import Typeahead from 'svelte-typeahead/src/Typeahead.svelte';
     export let data;
+
+    let entry = '';
+    let lista_movimientos = data.lista_movimientos.map(movimiento => movimiento.nombre);
+    let lista_filtrada_movim = [];
+    let movim_seleccionado = null;
+
+    function CompararInput(event) {
+        entry = event.target.value;
+        lista_filtrada_movim = lista_movimientos.filter(suggestion =>
+            suggestion.toLowerCase().includes(entry.toLowerCase())
+        );
+    }
+
+    function FiltrarInput(suggestion) {
+        movim_seleccionado = suggestion;
+        entry = suggestion;
+        lista_filtrada_movim = [];
+    }
 </script>
 
 
@@ -10,10 +29,30 @@
         <input type="text" id="id" name="id">
         <button type="submit">Buscar</button>
     </form>
-    <form class="buscar_nombre" method='GET' action="?/show_name">
-        <label for="nombre">Buscar por nombre:</label>
-        <input type="text" id="nombre" name="nombre">
-        <button type="submit">Buscar</button>
+    <div class="buscar_nombre">
+        <div class="typeahead">
+            <Typeahead
+                items={lista_filtrada_movim}
+                label="Buscar por nombre:"
+                bind:value={entry}
+                on:input={CompararInput}
+                on:select={FiltrarInput}
+                placeholder="Buscar..."
+                labelClass="transparent-label"
+            />
+        </div>
+        {#if entry && lista_filtrada_movim.length > 0}
+            <ul class="suggestions">
+                {#each lista_filtrada_movim as item}
+                    <li on:click={() => FiltrarInput(item)}>{item}</li>
+                {/each}
+            </ul>
+        {/if}
+        <form method='GET' action="?/show_name">
+            <input type="hidden" name="nombre" value="{movim_seleccionado}">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
 </div>
 {#if !data.error}
     {#if data.movimiento}
@@ -96,6 +135,39 @@
 
 
 <style>
+    .buscar_nombre {
+        grid-column: 2;
+        color: black;
+        display: grid;
+    }
+    .typeahead {
+        display: inline-block;
+        width: 75%;
+        padding: 10px;
+        justify-self: center;
+    }
+    .suggestions {
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        margin-top: 68px;
+        width: 25%;
+        justify-self: center;
+        padding: 0 10px;
+    }
+    .suggestions li {
+        list-style: none;
+        display: list-item;
+        cursor: pointer;
+        text-align: left;
+    }
+    .suggestions li:hover {
+        background-color: #f1f1f1;
+    }
     .form_movimientos {
         display: grid;
         grid-template-columns: 0.5fr 1.5fr;
@@ -107,21 +179,25 @@
         padding: 20px 0;
         border-radius: 5px;
         text-align: center;
-    } button {
+    }
+    button {
         padding: 10px;
         background-color: #555;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-    } form {
+        justify-self: center;
+        align-self: center;
+    }
+    form {
         display: grid;
         gap: 10px;
         width: 90%;
         justify-self: center;
         align-self: center;
-        text-align: center;
-    } input {
+    }
+    input {
         padding: 5px;
         border-radius: 5px;
         border: 1px solid #333;
