@@ -4,7 +4,13 @@
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
     import { writable } from 'svelte/store';
-    import Typeahead from 'svelte-typeahead';
+
+    let Typeahead;
+
+    onMount(async () => {
+        const module = await import('svelte-typeahead');
+        Typeahead = module.default || module;
+    });
 
     export let data;
     let { equipos, pagina, cantidadEquipos } = data;
@@ -143,7 +149,7 @@
             />
         </label>
         <label>
-            Generacion:
+            Generación:
             <input
                 name="generacion"
                 type="integer"
@@ -160,17 +166,21 @@
             {#each $equipo.integrantes as integrante, index}
                 <fieldset>
                     <legend>Integrante {index + 1}</legend>
-                    <Typeahead
-                        label="Seleccionar pokemon"
-                        placeholder={`Buscar pokemon por nombre/ID`}
-                        data={data.pokemons}
-                        extract={(pokemon) => `${pokemon.id} ${pokemon.nombre}`}
-                        on:select={({ detail }) => {
-                            $equipo.integrantes[index].id_pkm = detail.original.id;
-                            cargarMovimientos($equipo.integrantes[index].id_pkm);
-                        }}
-                        inputAfterSelect="clear"
-                    />
+                    {#if Typeahead}
+                        <Typeahead
+                            label="Seleccionar pokemon"
+                            placeholder={`Buscar pokemon por nombre/ID`}
+                            data={data.pokemons}
+                            extract={(pokemon) => `${pokemon.id} ${pokemon.nombre}`}
+                            on:select={({ detail }) => {
+                                $equipo.integrantes[index].id_pkm = detail.original.id;
+                                $equipo.integrantes[index].nombre_pkm = detail.original.nombre;
+                                cargarMovimientos($equipo.integrantes[index].id_pkm);
+                            }}
+                            bind:value={$equipo.integrantes[index].nombre_pkm}
+                           
+                        />
+                    {/if}
                     <div>
                         <label for="pokemon-name-{index}">ID:</label>
                         <input
@@ -181,21 +191,23 @@
                             readonly
                         />
                     </div>
-                    <Typeahead
-                        label="Seleccionar Movimiento"
-                        placeholder="Buscar movimiento por nombre"
-                        data={movimientosTransformados}
-                        extract={(movimiento) => movimiento.nombre}
-                        on:select={({ detail }) => {
-                            if (!$equipo.integrantes[index].id_movimientos_pkm.includes(detail.original.id)) {
-                                $equipo.integrantes[index].id_movimientos_pkm = [
-                                    ...$equipo.integrantes[index].id_movimientos_pkm,
-                                    detail.original.id
-                                ];
-                            }
-                        }}
-                        inputAfterSelect="clear"
-                    />
+                    {#if Typeahead}
+                        <Typeahead
+                            label="Seleccionar Movimiento"
+                            placeholder="Buscar movimiento por nombre"
+                            data={movimientosTransformados}
+                            extract={(movimiento) => movimiento.nombre}
+                            on:select={({ detail }) => {
+                                if (!$equipo.integrantes[index].id_movimientos_pkm.includes(detail.original.id)) {
+                                    $equipo.integrantes[index].id_movimientos_pkm = [
+                                        ...$equipo.integrantes[index].id_movimientos_pkm,
+                                        detail.original.id
+                                    ];
+                                }
+                            }}
+                            inputAfterSelect="clear"
+                        />
+                    {/if}
                     {#if integrante.id_movimientos_pkm.length > 0}
                     <h3>Movimientos Seleccionados [min 1 / max 4]</h3>
                         <ul>
@@ -212,14 +224,19 @@
                             {/each}
                         </ul>
                     {/if}
-                    <Typeahead
-                        label="Seleccionar naturaleza"
-                        placeholder={`Buscar naturaleza por nombre/ID`}
-                        data={data.naturalezas}
-                        extract={(naturaleza) => `${naturaleza.id} ${naturaleza.nombre}`}
-                        on:select={({ detail }) => $equipo.integrantes[index].id_naturaleza = detail.original.id}
-                        inputAfterSelect="clear"
-                    />
+                    {#if Typeahead}
+                        <Typeahead
+                            label="Seleccionar naturaleza"
+                            placeholder={`Buscar naturaleza por nombre/ID`}
+                            data={data.naturalezas}
+                            extract={(naturaleza) => `${naturaleza.id} ${naturaleza.nombre}`}
+                            on:select={({ detail }) => {
+                                $equipo.integrantes[index].id_naturaleza = detail.original.id;
+                                $equipo.integrantes[index].nombre_naturaleza = detail.original.nombre;
+                            }}
+                            bind:value={$equipo.integrantes[index].nombre_naturaleza}
+                        />
+                    {/if}
                     <div>
                         <label for="naturaleza-name-{index}">ID:</label>
                         <input
