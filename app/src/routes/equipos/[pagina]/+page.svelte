@@ -38,7 +38,7 @@
             <ul class="team-list">
                 <li>
                     <div class="team team-hover">
-                        <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong></span>
+                        <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong> [{equipo.id}]</span>
                             <ul>
                                 {#each equipo.integrantes as integrante}               
                                     <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
