@@ -7,7 +7,37 @@ body {
     background-size:16px 16px;
     height: 100%;
 }
+a {
+    text-decoration: none;
+}
 
+/* Estilos paginado de equipos */
+.team-list .team-hover {
+    width: auto; 
+    height: auto; 
+    padding: 8px; 
+    font-size: 8pt; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+.team-hover {
+	border-color: #555555;
+	background: #FFFFFF;
+	background: linear-gradient(to bottom,  #dce4ec,  #c6d3e0);
+}
+.team-container {
+    padding: 20px;
+}
+.team-list {
+    justify-content: center; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Estilos tipos pokemon */
 .pokemon-tipo {
   display: inline-block;
   padding: 6px 10px;

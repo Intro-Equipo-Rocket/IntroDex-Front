@@ -181,7 +181,7 @@
   align-items: center;
   width: 150px; 
   height: 150px;
-  background-color: #f4f4f4; 
+  background: #fff;
 }
 
 .pokemon-imagen {
@@ -200,7 +200,7 @@
   justify-content: center;
   align-items: center; 
   position: relative;
-  background-color: #f4f4f4; 
+  background: #fff;
 }
 
 .pokemon-info table {

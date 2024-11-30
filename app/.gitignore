@@ -1,5 +1,8 @@
 node_modules
 
+#package-lock
+package-lock.json
+
 # Output
 .output
 .vercel
