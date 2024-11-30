@@ -27,7 +27,7 @@ export const actions = {
 };
 
 
-export async function load({ url }) {
+async function primer_load({ url }) {
   const id = url.searchParams.get('id');
   const nombre = url.searchParams.get('nombre');
   if (id) {
@@ -78,4 +78,23 @@ export async function load({ url }) {
         pokemones: data_pokemones
     };
   }
+}
+
+async function segundo_load() {
+  const url = 'http://127.0.0.1:8000/movimientos/'
+  const response = await fetch(url);
+  if (!response.ok) {
+    return {
+      status: response.status,
+      error: 'Could not fetch the Movimientos'
+    };
+  }
+  const data = await response.json();
+  return { lista_movimientos: data };
+}
+
+export async function load({ url }) {
+  const primerData = await primer_load({ url });
+  const segundoData = await segundo_load();
+  return { ...primerData, ...segundoData };
 }
