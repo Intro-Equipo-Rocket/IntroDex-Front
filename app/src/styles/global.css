@@ -11,6 +11,94 @@ a {
     text-decoration: none;
 }
 
+/* Estilos formularios */
+.team-form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+}
+.team-form h3{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: bold;
+}
+.team-form label{
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+.team-form input[type="text"],
+.team-form input[type="number"],
+.team-form input[type="integer"]{
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.team-form button{
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #2969ad;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.team-form button:hover{
+  background-color: #03468e;
+}
+.team-form button[type="button"]{
+  background-color: #494949;
+}
+
+.team-form button[type="button"]:hover{
+  background-color: #202020;
+}
+.team-form button:disabled {
+  background-color: #8e8e8e;
+  cursor: not-allowed;
+}
+.team-form fieldset {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+.team-form legend {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ev-container {
+  display: flex;
+  justify-content: space-around;
+}
+.ev-container input[type="number"] {
+    height: 25%;
+    width: auto;
+}
+.sum-container {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #555;
+  text-align: right;
+}
+
 /* Estilos paginado de equipos */
 .team-list .team-hover {
     width: auto; 
