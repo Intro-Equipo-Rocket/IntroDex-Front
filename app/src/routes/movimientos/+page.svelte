@@ -21,8 +21,6 @@
     }
 </script>
 
-
-<h1>Movimientos</h1>
 <div class="form_movimientos">
     <form class="buscar_id" method='GET' action="?/show_id">
         <label for="id">Buscar por id:</label>
@@ -38,7 +36,6 @@
                 on:input={CompararInput}
                 on:select={FiltrarInput}
                 placeholder="Buscar..."
-                labelClass="transparent-label"
             />
         </div>
         {#if entry && lista_filtrada_movim.length > 0}
@@ -54,6 +51,7 @@
         </form>
     </div>
 </div>
+
 {#if !data.error}
     {#if data.movimiento}
             <div class="datos_movimiento {data.movimiento.class_tipo.nombre}">
@@ -135,6 +133,19 @@
 
 
 <style>
+    .form_movimientos {
+        display: grid;
+        grid-template-columns: 0.5fr 1.5fr;
+        gap: 10px;
+        margin: 20px auto;
+        width: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 20px 0;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 50px;
+    }
     .buscar_nombre {
         grid-column: 2;
         color: black;
@@ -167,18 +178,6 @@
     }
     .suggestions li:hover {
         background-color: #f1f1f1;
-    }
-    .form_movimientos {
-        display: grid;
-        grid-template-columns: 0.5fr 1.5fr;
-        gap: 10px;
-        margin: 20px auto;
-        width: 50%;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 20px 0;
-        border-radius: 5px;
-        text-align: center;
     }
     button {
         padding: 10px;
