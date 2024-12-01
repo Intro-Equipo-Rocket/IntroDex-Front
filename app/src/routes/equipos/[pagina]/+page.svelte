@@ -2,6 +2,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
+	import { on } from 'svelte/events';
     import { get } from 'svelte/store';
 
     export let data;
@@ -16,6 +17,27 @@
             pagina = newPage;
             cantidadEquipos = newCantidadEquipos;
             equipos = data.equipos;
+        }
+    }
+
+    async function eliminarEquipo(equipoId) {
+        if (confirm(`Estas seguro de eliminar el quipo con id ${equipoId}?`)) {
+            try {
+                const response = await fetch(`http://localhost:8000/equipos/eliminar/${equipoId}`, {method: 'DELETE'});
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    console.error('Error al borrar el equipo:', error);
+                    alert(`Error: ${error.detail}`);
+                    return;
+                }
+
+                equipos = equipos.filter((equipo) => equipo.id !== equipoId);
+                alert('Equipo eliminado exitosamente.');
+            } catch(error) {
+                console.error('Error interno:', error)
+                alert('Hubo un error al eliminar el equipo');
+            }
         }
     }
 
@@ -38,16 +60,17 @@
             <ul class="team-list">
                 <li>
                     <div class="team team-hover">
-                        <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong> [{equipo.id}]</span>
-                            <ul>
+                        <span>[Gen {equipo.generacion}]<strong>{truncate(equipo.nombre, 30)}</strong>[{equipo.id}]</span>
+                        <button style="padding: 10px; background: red; color: white;" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
+                        <ul>
                                 {#each equipo.integrantes as integrante}               
                                     <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
                                 {/each}
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
         {/each}
 
         <nav>
@@ -61,4 +84,6 @@
     {:else}
         <p>No hay equipos para mostrar en esta página.</p>
     {/if}
+
+    <button style="padding: 10px; background: red; color: white;" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
 </main>
