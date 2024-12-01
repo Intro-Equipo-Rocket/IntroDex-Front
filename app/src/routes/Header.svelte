@@ -21,11 +21,19 @@
                 <span class="main-menu-title">Movimientos</span>
             </a>
         </li>
-        <li class="main-menu-item">
+        <li class="main-menu-item main-menu-item-active">
             <a class="main-menu-heading" href="/equipos">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="main-menu-icon img-fixed" width="24" height="24" aria-label="Game controller icon" role="img"><path fill="#a3a3a3" fill-rule="evenodd" d="M117.4 121.9c-104.8 14.6-152 142.6-82.2 222.9 48 55 131.9 62.7 187.2 17l4.6-3.8H285l4.6 3.7c55.3 45.8 139.3 38.2 187.2-17 70.2-80.6 22.4-208.6-83.1-222.9-14.8-2-261.9-2-276.2 0m42.8 52.8c2.2 2.2 2.2 2.7 2.5 29.4l.3 27.2h53.5l2.4 2.5c3.8 3.8 3.8 40.8 0 44.6l-2.4 2.4H163l-.3 27.2c-.4 35 2.2 31.7-25 31.7-27.3 0-24.7 3.3-25-31.7l-.4-27.2H59l-2.4-2.4c-3.9-3.8-3.9-40.8 0-44.6l2.4-2.5h53.4l.3-27c.4-35-1.8-32.4 26.3-32 18.3.1 19 .2 21.3 2.4m259.3 16.5a33.7 33.7 0 0 1 19.5 42.5 33.2 33.2 0 0 1-59 5.8c-16.4-26.6 9.7-58.4 39.5-48.3M352 259a33 33 0 0 1 3.7 60 32.7 32.7 0 0 1-48-27.3A32.9 32.9 0 0 1 352 259"></path></svg>
                 <span class="main-menu-title">Equipos</span>
             </a>
+            <ul class="main-menu-sub">
+                <li>
+                    <a href="/equipos/crear_equipo">CrearEquipo</a>
+                </li>
+                <li>
+                    <a href="/equipos/editar_equipo">EditarEquipo</a>
+                </li>
+            </ul>
         </li>
     </ul>
 </nav>
@@ -64,12 +72,13 @@ h1 {
     position:relative;
     display:flex;
     flex-wrap:wrap;
-    margin:0
+    margin:0;
 }
 .main-menu-list li {
     list-style:none
 }
 .main-menu-item {
+    position: relative;
     flex:1 0;
     color:#f0f0f0;
     text-shadow:1px 1px 2px rgba(0,0,0,.7)
@@ -91,6 +100,31 @@ h1 {
     width:24px;
     height:24px;
     margin:0 0 .25rem
+}
+.main-menu-sub {
+    position: absolute; 
+    width: 274.5px;
+    top: 100%; 
+    background-color: #333; 
+    color: #fff; 
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+    visibility: hidden; 
+    opacity: 0; 
+    transition: opacity 0.3s ease, visibility 0.3s ease; 
+}
+.main-menu-sub a {
+    color: #fff; 
+    text-decoration: none; 
+    padding: 5px 10px;
+    display: block; 
+}
+.main-menu-sub a:hover {
+     background-color: #555; 
+}
+.main-menu-item:hover > .main-menu-sub {
+  visibility: visible; 
+  opacity: 1; 
 }
 
 </style>
