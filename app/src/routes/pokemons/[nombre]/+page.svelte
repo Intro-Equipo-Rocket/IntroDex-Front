@@ -93,6 +93,29 @@
   </div>
 </div>
 
+{#if data.pokemon.evoluciones[0]}
+  <h2>Evoluciones:</h2>
+    <div class="pokemon-evoluciones">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each data.pokemon.evoluciones as evolucion}
+            <tr>
+              <td><a href="./{evolucion.pokemon.nombre}" style="text-decoration: underline">{evolucion.pokemon.nombre}</a></td>
+              <td>
+                <img src={evolucion.imagen_evolucion} alt={evolucion.pokemon.nombre} />
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+{/if}
 
 <h2 class="movimiento">Movimientos:</h2>
 <div class="informacion-tabla-movimientos">
@@ -169,6 +192,36 @@
   gap: 20px;
   background: #fff;
   padding: 20px;
+}
+
+.pokemon-evoluciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-transform: capitalize;
+}
+
+.pokemon-evoluciones table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.pokemon-evoluciones th {
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  padding-inline: 10px;
+  background-color: #c0c3c7;
+}
+
+.pokemon-evoluciones td {
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #b8adad;
+  color : #555;
+  background-color: white;
 }
 
 .pokemon-header {
