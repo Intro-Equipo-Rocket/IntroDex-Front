@@ -11,6 +11,17 @@ a {
     text-decoration: none;
 }
 
+.title {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: -30px;
+}
+
 /* Estilos formularios */
 .team-form {
   max-width: 900px;
@@ -104,25 +115,78 @@ a {
     width: auto; 
     height: auto; 
     padding: 8px; 
-    font-size: 8pt; 
+    font-size: 10pt; 
     border-radius: 8px; 
-    border: 1px solid #ccc; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    border: 1px solid grey;
+    box-shadow: 5 5px 5px rgba(0, 0, 0, 0.1); 
 }
+
 .team-hover {
-	border-color: #555555;
-	background: #FFFFFF;
-	background: linear-gradient(to bottom,  #dce4ec,  #c6d3e0);
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid grey;
+	background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
+
+.team-hover:hover {
+  background-color: #b9b9b9;
+  transform: scale(1.005);
+}
+
 .team-container {
-    padding: 20px;
+    padding: 15px;
 }
+
 .team-list {
     justify-content: center; 
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+}
+
+.team-delete-button {
+  background-color: #494949;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: center;
+}
+
+.team-delete-button:disabled {
+  background-color: #8e8e8e;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.team-delete-button:hover {
+  background-color: #f44336;
+  transform: scale(1.05);
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.picon {
+  width: 100px;
+  height: 100px;
 }
 
 /* Estilos tipos pokemon */
