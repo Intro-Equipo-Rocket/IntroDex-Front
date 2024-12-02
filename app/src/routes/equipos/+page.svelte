@@ -17,6 +17,27 @@
         }
     }
 
+    async function eliminarEquipo(equipoId) {
+        if (confirm(`Estas seguro de eliminar el equipo con id ${equipoId}?`)) {
+            try {
+                const response = await fetch(`http://localhost:8000/equipos/eliminar/${equipoId}`, { method: 'DELETE',})
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    console.error('Error al borrar el equipo:', error);
+                    alert(`Error: ${error.detail}`);
+                    return;
+                }
+
+                equipos = equipos.filter((equipo) => equipo.id !== equipoId);
+                alert('Equipo eliminado exitosamente.');
+            } catch(error) {
+                console.error('Error interno:', error)
+                alert('Hubo un error al eliminar el equipo');
+            }
+        }
+    }
+
     function cambiarPagina(nuevaPagina){
         goto(`/equipos/${nuevaPagina}?cantidad_equipos=${cantidadEquipos}`);
     }
@@ -39,7 +60,10 @@
                         <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong> [{equipo.id}]</span>
                         <ul>
                             {#each equipo.integrantes as integrante}               
-                                <img src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
+                                <img src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />
+                                <div>
+                                    <button class="team-delete-button" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
+                                </div>                                                                         
                             {/each}
                         </ul>
                     </div>

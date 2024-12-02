@@ -21,9 +21,9 @@
     }
 
     async function eliminarEquipo(equipoId) {
-        if (confirm(`Estas seguro de eliminar el quipo con id ${equipoId}?`)) {
+        if (confirm(`Estas seguro de eliminar el equipo con id ${equipoId}?`)) {
             try {
-                const response = await fetch(`http://localhost:8000/equipos/eliminar/${equipoId}`, {method: 'DELETE'});
+                const response = await fetch(`http://localhost:8000/equipos/eliminar/${equipoId}`, { method: 'DELETE',})
 
                 if (!response.ok) {
                     const error = await response.json();
@@ -61,10 +61,12 @@
                 <li>
                     <div class="team team-hover">
                         <span>[Gen {equipo.generacion}]<strong>{truncate(equipo.nombre, 30)}</strong>[{equipo.id}]</span>
-                        <button style="padding: 10px; background: red; color: white;" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
                         <ul>
                                 {#each equipo.integrantes as integrante}               
-                                    <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
+                                    <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />
+                                    <div>
+                                        <button class="team-delete-button" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
+                                    </div>                                                                                
                                 {/each}
                         </ul>
                     </div>
@@ -84,6 +86,4 @@
     {:else}
         <p>No hay equipos para mostrar en esta página.</p>
     {/if}
-
-    <button style="padding: 10px; background: red; color: white;" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
 </main>
