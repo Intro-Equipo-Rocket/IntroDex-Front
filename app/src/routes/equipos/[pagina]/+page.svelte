@@ -52,7 +52,8 @@
 </script>
 
 <main>
-    <h1>Equipos - Página {pagina}</h1>
+    <h1 class="title">Glosario de equipos</h1>
+    <h2 class="subtitle">Página - {pagina}</h2>
 
     {#if equipos.length > 0}
         {#each equipos as equipo}
@@ -61,14 +62,14 @@
                 <li>
                     <div class="team team-hover">
                         <span>[Gen {equipo.generacion}]<strong>{truncate(equipo.nombre, 30)}</strong>[{equipo.id}]</span>
-                        <ul>
-                                {#each equipo.integrantes as integrante}               
-                                    <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />
-                                    <div>
-                                        <button class="team-delete-button" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
-                                    </div>                                                                                
-                                {/each}
+                        <ul class="team-members">
+                            {#each equipo.integrantes as integrante}               
+                                <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                                
+                            {/each}
                         </ul>
+                        <div>
+                            <button class="team-delete-button" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
+                        </div>
                     </div>
                 </li>
             </ul>
