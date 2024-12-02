@@ -106,7 +106,7 @@
         <tbody>
           {#each data.pokemon.evoluciones as evolucion}
             <tr>
-              <td><a href="./{evolucion.pokemon.nombre}" style="text-decoration: underline">{evolucion.pokemon.nombre}</a></td>
+              <td><a href="./{evolucion.pokemon.nombre}">{evolucion.pokemon.nombre}</a></td>
               <td>
                 <img src={evolucion.imagen_evolucion} alt={evolucion.pokemon.nombre} />
               </td>
@@ -211,17 +211,32 @@
   text-align: center;
   color: #333;
   font-weight: bold;
+  font-size: 1.5rem;
   padding-inline: 10px;
   background-color: #c0c3c7;
+  border: 1px solid #796d6d;
 }
 
 .pokemon-evoluciones td {
   padding: 10px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border-bottom: 1px solid #b8adad;
   color : #555;
   background-color: white;
+}
+
+.pokemon-evoluciones a{
+  text-decoration: none; 
+  color: #212521; 
+  font-weight: bold; 
+  font-size: 1.2em; 
+  transition: color 0.3s ease; 
+}
+
+.pokemon-evoluciones a:hover {
+  color: #485849; 
+  text-decoration: underline; 
 }
 
 .pokemon-header {
@@ -291,7 +306,7 @@
   text-align: center;
   color : #333;
   font-size: 2rem;
-  border: 1px solid #b8adad;
+  border: 1px solid #796d6d;
   background-color: #c0c3c7;
 }
 
@@ -299,7 +314,7 @@
   padding: 10px;
   text-align: center;
   font-size: 1.5rem;
-  border-bottom: 1px solid #b8adad;
+  border-bottom: 1px solid #796d6d;
   color : #555;
 }
 
