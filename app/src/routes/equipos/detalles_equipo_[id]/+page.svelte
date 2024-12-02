@@ -4,36 +4,38 @@
 
 <main>
   <h1>Detalles del Equipo</h1>
-  <table class="detalle-equipo">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Generación</th>
-        <th>Integrantes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{equipo.id}</td>
-        <td>{equipo.nombre}</td>
-        <td>{equipo.generacion}</td>
-        <td>
-          <ul>
-            {#each equipo.integrantes as integrante}
-              <li>
-                <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />
-                {integrante.pokemon.nombre}
-              </li>
-            {/each}
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="detalle-equipo">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Generación</th>
+          <th>Integrantes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{equipo.id}</td>
+          <td>{equipo.nombre}</td>
+          <td>{equipo.generacion}</td>
+          <td>
+            <ul>
+              {#each equipo.integrantes as integrante}
+                <li>
+                  <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />
+                  {integrante.pokemon.nombre}
+                </li>
+              {/each}
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>
 
-<style
+<style>
 .detalle-equipo {
   max-width: 85%;
   margin: 0 auto; 
@@ -69,4 +71,4 @@
   height: 40px;
   margin-right: 10px;
 }
-></style>
+</style>
