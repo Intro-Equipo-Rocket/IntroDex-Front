@@ -1,5 +1,5 @@
 <script>
-  export let equipo; 
+  export let data; 
 </script>
 
 <main>
@@ -16,12 +16,12 @@
       </thead>
       <tbody>
         <tr>
-          <td>{equipo.id}</td>
-          <td>{equipo.nombre}</td>
-          <td>{equipo.generacion}</td>
+          <td>{data.equipo.id}</td>
+          <td>{data.equipo.nombre}</td>
+          <td>{data.equipo.generacion}</td>
           <td>
             <ul>
-              {#each equipo.integrantes as integrante}
+              {#each data.equipo.integrantes as integrante}
                 <li>
                   <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />
                   {integrante.pokemon.nombre}
