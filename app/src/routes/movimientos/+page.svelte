@@ -2,28 +2,35 @@
     import Typeahead from 'svelte-typeahead/src/Typeahead.svelte';
     export let data;
 
-    let entry = '';
+    let entry_nombre = '';
     let lista_movimientos = data.lista_movimientos.map(movimiento => movimiento.nombre);
     let lista_filtrada_movim = [];
     let movim_seleccionado = null;
 
     function CompararInput(event) {
-        entry = event.target.value;
+        entry_nombre = event.target.value;
         lista_filtrada_movim = lista_movimientos.filter(suggestion =>
-            suggestion.toLowerCase().includes(entry.toLowerCase())
+            suggestion.toLowerCase().includes(entry_nombre.toLowerCase())
         );
     }
 
     function FiltrarInput(suggestion) {
         movim_seleccionado = suggestion;
-        entry = suggestion;
+        entry_nombre = suggestion;
         lista_filtrada_movim = [];
+    }
+
+    $: if (data) {
+        document.body.style.cursor = 'default';
     }
 </script>
 
-
-<h1>Movimientos</h1>
-<div class="form_movimientos">
+<div class="form_movimientos" on:submit={() => {
+    document.body.style.cursor = 'wait';
+    setTimeout(() => {
+        document.getElementById('id').value = '';
+    }, 0);
+}}>
     <form class="buscar_id" method='GET' action="?/show_id">
         <label for="id">Buscar por id:</label>
         <input type="text" id="id" name="id">
@@ -34,61 +41,61 @@
             <Typeahead
                 items={lista_filtrada_movim}
                 label="Buscar por nombre:"
-                bind:value={entry}
+                bind:value={entry_nombre}
                 on:input={CompararInput}
                 on:select={FiltrarInput}
                 placeholder="Buscar..."
-                labelClass="transparent-label"
             />
         </div>
-        {#if entry && lista_filtrada_movim.length > 0}
+        {#if entry_nombre && lista_filtrada_movim.length > 0}
             <ul class="suggestions">
                 {#each lista_filtrada_movim as item}
                     <li on:click={() => FiltrarInput(item)}>{item}</li>
                 {/each}
             </ul>
         {/if}
-        <form method='GET' action="?/show_name">
+        <form method='GET' action="?/show_name" on:submit={() => entry_nombre = ''}>
             <input type="hidden" name="nombre" value="{movim_seleccionado}">
             <button type="submit">Buscar</button>
         </form>
     </div>
 </div>
+
 {#if !data.error}
     {#if data.movimiento}
-            <div class="datos_movimiento {data.movimiento.class_tipo.nombre}">
-                <span class="movim_nombre">{data.movimiento.nombre}</span>
-                <div class="datos_movim_numericos">
-                    <span class="movim_precision">Precisión
-                        {#if data.movimiento.precision}
-                            {data.movimiento.precision}%
-                        {:else}
-                            N/A
-                        {/if}
-                    </span>
-                    <span class="movim_potencia">Potencia
-                        {#if data.movimiento.potencia}
-                            {data.movimiento.potencia}
-                        {:else}
-                            N/A
-                        {/if}
-                    </span>
-                    <span class="movim_usos">Usos
-                        {#if data.movimiento.usos}
-                            {data.movimiento.usos}
-                        {:else}
-                            N/A
-                        {/if}</span>
-                </div>
-                {#if data.movimiento.class_categoria.nombre == "físico"}
-                    <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-physical.png" alt="Físico.png">
-                {:else if data.movimiento.class_categoria.nombre == "especial"}
-                    <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-special.png" alt="Especial.png">
-                {:else if data.movimiento.class_categoria.nombre == "estado"}
-                    <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-status.png" alt="Estado.png">
-                {/if}
-                <span class="efecto">{data.movimiento.class_efecto.descripcion}</span>
+        <div class="datos_movimiento {data.movimiento.class_tipo.nombre}">
+            <span class="movim_nombre">{data.movimiento.nombre}</span>
+            <div class="datos_movim_numericos">
+                <span class="movim_precision">Precisión
+                    {#if data.movimiento.precision}
+                        {data.movimiento.precision}%
+                    {:else}
+                        N/A
+                    {/if}
+                </span>
+                <span class="movim_potencia">Potencia
+                    {#if data.movimiento.potencia}
+                        {data.movimiento.potencia}
+                    {:else}
+                        N/A
+                    {/if}
+                </span>
+                <span class="movim_usos">Usos
+                    {#if data.movimiento.usos}
+                        {data.movimiento.usos}
+                    {:else}
+                        N/A
+                    {/if}</span>
             </div>
+            {#if data.movimiento.class_categoria.nombre == "físico"}
+                <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-physical.png" alt="Físico.png">
+            {:else if data.movimiento.class_categoria.nombre == "especial"}
+                <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-special.png" alt="Especial.png">
+            {:else if data.movimiento.class_categoria.nombre == "estado"}
+                <img class="movim_categoria" src="https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/seals/gen4/move-status.png" alt="Estado.png">
+            {/if}
+            <span class="efecto">{data.movimiento.class_efecto.descripcion}</span>
+        </div>
         <h1>Pokemones</h1>
         {#if !data.pokemones}
             <h2 class="error_msg">No hay pokemones que aprendan este movimiento</h2>
@@ -135,6 +142,19 @@
 
 
 <style>
+    .form_movimientos {
+        display: grid;
+        grid-template-columns: 0.5fr 1.5fr;
+        gap: 10px;
+        margin: 20px auto;
+        width: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 20px 0;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 50px;
+    }
     .buscar_nombre {
         grid-column: 2;
         color: black;
@@ -167,18 +187,6 @@
     }
     .suggestions li:hover {
         background-color: #f1f1f1;
-    }
-    .form_movimientos {
-        display: grid;
-        grid-template-columns: 0.5fr 1.5fr;
-        gap: 10px;
-        margin: 20px auto;
-        width: 50%;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 20px 0;
-        border-radius: 5px;
-        text-align: center;
     }
     button {
         padding: 10px;

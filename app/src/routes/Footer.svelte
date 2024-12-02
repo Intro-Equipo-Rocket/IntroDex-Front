@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <h5 style="text-align: center;">Copyright © 2024 Equipo Rockect
+    <h5 style="text-align: center;">Copyright © 2024 Equipo Rocket
 All Rights Reserved
  
 This product is protected by copyright and distributed under
