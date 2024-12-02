@@ -32,20 +32,16 @@
 
     {#if equipos.length > 0}
     {#each equipos as equipo}
-    <div class="team-container">
-            <ul class="team-list">
-                <li>
-                    <div class="team-hover">
-                        <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong> [{equipo.id}]</span>
-                        <ul>
-                            {#each equipo.integrantes as integrante}               
-                                <img src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
-                            {/each}
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <a href={`equipos/detalles_equipo/${equipo.id}`} class="team-container">
+            <div class="team">
+                <span>[Gen {equipo.generacion}] <strong>{truncate(equipo.nombre, 30)}</strong> [{equipo.id}]</span>
+                <ul>
+                    {#each equipo.integrantes as integrante}               
+                        <img class="picon" src="{integrante.pokemon.imagen}" alt="{integrante.pokemon.nombre}" />                                                                         
+                    {/each}
+                </ul>
+            </div>
+    </a>
         {/each}
         <nav>
             {#if pagina > 1}

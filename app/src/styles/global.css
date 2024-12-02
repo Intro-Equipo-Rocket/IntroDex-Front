@@ -115,8 +115,32 @@ a {
 	background: linear-gradient(to bottom,  #dce4ec,  #c6d3e0);
 }
 .team-container {
-    padding: 20px;
+    background: #d4cece;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: auto;
 }
+
+.team-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.team-container img {
+    max-width: 80px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
 .team-list {
     justify-content: center; 
     list-style: none;
