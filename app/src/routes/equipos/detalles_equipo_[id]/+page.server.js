@@ -9,10 +9,7 @@ export async function load({ params }) {
   }
 
   const equipo = await response.json();
-  console.log(equipo)
-  return {
-    equipo
-  };
+  return {equipo};
 }
 
 
