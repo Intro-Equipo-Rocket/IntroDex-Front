@@ -68,6 +68,7 @@
                             {/each}
                         </ul>
                         <div>
+                            <button class="team-detail-button" on:click={() => goto(`/equipos/detalles_equipo_${equipo.id}`)}>Detalles</button>
                             <button class="team-delete-button" on:click={() => eliminarEquipo(equipo.id)}>Eliminar</button>
                         </div>
                     </div>
