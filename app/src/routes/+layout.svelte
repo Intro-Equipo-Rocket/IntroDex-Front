@@ -1,17 +1,17 @@
 <script>
-   import Header from './Header.svelte';
-   import Footer from './Footer.svelte';
-   import '../styles/global.css';
+	import Header from './Header.svelte';
+	import Footer from './Footer.svelte';
+	import '../styles/global.css';
 
-   let { children } = $props();
+	let { children } = $props();
 </script>
 
 <div class="app">
-   <Header />
+	<Header />
 
-   <main>
-       {@render children()}
-   </main>
-  
-   <Footer />
+	<main>
+		{@render children()}
+	</main>
+
+	<Footer />
 </div>
