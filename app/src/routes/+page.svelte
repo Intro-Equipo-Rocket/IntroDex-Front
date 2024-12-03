@@ -1,5 +1,5 @@
 <div class="lider">
-    <img src="https://i.pinimg.com/736x/3d/b7/0c/3db70c93b891cc7ae121d66626fb3f21.jpg" alt="Img del lider" />
+    <img src="https://i.pinimg.com/736x/5a/25/76/5a257680a9a4ec3413350ab09ed900fc.jpg" alt="Img del lider" />
     <h2>TODOS ALABEN A NUESTRO LIDER</h2>
 </div>
 
