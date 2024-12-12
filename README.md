@@ -4,7 +4,7 @@
 
 ## Descripción
 
-IntroDex-front es la continuacion del proyecto Introdex y es desarrollado con Html, Css y Javascript.
+IntroDex-Front es la continuacion del proyecto Introdex y es desarrollado con Html, Css y Javascript.
 Este proyecto utiliza [Svelte](https://svelte.dev//) como framework de desarrollo.
 
 Consiste en implementar un sitio web para obtener información sobre Pokemones, sus movimientos y habilidades así como también la posibilidad de creación de equipos de combate (similar a [PokemonDB](https://pokemondb.net/)).
@@ -24,7 +24,7 @@ Consiste en implementar un sitio web para obtener información sobre Pokemones, 
 
 # sv
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Todo lo que necesitas para construir un proyecto Svelte, lo puedes encontrar aquí [`sv`](https://github.com/sveltejs/cli).
 
 ## Desarrollo
 
