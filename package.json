@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "svelte-typeahead": "^4.4.2"
+  }
+}
